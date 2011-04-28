@@ -1,7 +1,7 @@
 package csci1902.lab4;
 
 public class BusStop {
-	public static int id = 1;
+	public static int id = 0;
 	private int stopNumber;
 	Q1 riders = new Q1();
 	

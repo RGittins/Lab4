@@ -9,19 +9,34 @@ public class ArrivalEvent implements Event {
 	
 	public void run() {
 		Simulator.agenda.add(new ArrivalEvent(stop), randomArrivalTime());
-		stop.addRider(new Rider(Simulator.agenda.getCurrentTime(),randomStop()));
+		
+		stop.addRider(new Rider(Simulator.agenda.getCurrentTime(),(Settings.STOPCOUNT+randomStop())%Settings.STOPCOUNT));
+		
+		if(stop.riders.length() > Stats.longestQ)
+			Stats.longestQ = stop.riders.length();
 		Stats.totalRiders++;
 	}
 	
-	private int randomArrivalTime()
+	private double randomArrivalTime()
 	{
-		//return
-		return 10;
+		int random = (int) (Math.random() * 9);
+		return Settings.ARRIVALRATE+(arrivalDistribution[random]*Settings.ARRIVALRATE);
 	}
+	
 	
 	private int randomStop()
 	{
-		return 10;
+		int random = (int)Math.random() * 49;
+		return stopDistribution[random];
 	}
-
+	private static int[] stopDistribution = new int[]{
+		2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,
+		4,5,6,7,8,9,10,11,12,13,14,15,16,
+		6,7,8,9,10,11,12,13,14,15,
+		7,8,9,10,11,12,13,
+		9,10,11,12
+	};
+	private static double[] arrivalDistribution = new double[]{
+		.75,.5,.5,.2,.2,-.2,-.2,-.5,-.5,-.75
+	};
 }

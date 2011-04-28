@@ -7,7 +7,6 @@ public class Simulator {
 	public static BusStop[] stops = new BusStop[Settings.STOPCOUNT];
 	
 	
-	
 	public static void main(String[] args) {
 		for(int i = 0;i<Settings.STOPCOUNT;i++)
 		{
@@ -27,6 +26,7 @@ public class Simulator {
 			agenda.remove().run();
 		
 		System.out.println("Total Riders: "+Stats.totalRiders);
+		System.out.println("Biggest Q: "+Stats.longestQ);
 		System.out.println("Average Wait Time: "+Stats.totalWaitTime/Stats.totalRiders);
 		System.out.println("Average RIDE Time: "+Stats.totalRideTime/Stats.totalRiders);
 	}

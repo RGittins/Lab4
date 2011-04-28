@@ -5,8 +5,20 @@ public class Bus {
 	int next;
 	Q1 riders = new Q1();
 	
-	public Bus(int stop)
-	{
+	public Bus(int stop){
 		next = stop;
+	}
+	
+	
+	public void incNextStop(){
+		next = (next+1)%Settings.STOPCOUNT;
+	}
+	
+	public int getNextStopNumber(){
+		return next;
+	}
+	
+	public BusStop getNextStop(){
+		return Simulator.stops[next];
 	}
 }
