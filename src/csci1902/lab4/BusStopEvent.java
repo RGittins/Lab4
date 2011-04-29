@@ -21,6 +21,7 @@ public class BusStopEvent implements Event {
 			if(currentRider.exitStop == bus.current.getStopNumber())
 			{			
 				Stats.totalRideTime += Simulator.agenda.getCurrentTime()+stopTime - currentRider.boardTime;
+				Stats.totalRidersRoad++;
 				stopTime += Settings.DEBOARDTIME;
 			}	
 			else
@@ -37,6 +38,7 @@ public class BusStopEvent implements Event {
 			Stats.totalWaitTime += r.boardTime - r.arrivalTime;
 			//System.out.println(r.boardTime + " " + r.arrivalTime);
 			bus.riders.add(r);
+			Stats.totalBoardedRiders++;
 			stopTime += Settings.BOARDTIME;
 		}
 		Simulator.agenda.add(new BusStopEvent(bus), Settings.TRAVELTIME+stopTime); 

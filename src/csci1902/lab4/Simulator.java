@@ -14,11 +14,11 @@ public class Simulator {
 			agenda.add(new ArrivalEvent(stops[i]), 10);
 		}
 		
-		int busSpace = (int) Math.floor(Settings.STOPCOUNT/Settings.BUSCOUNT); //Separate the buses evenly per amount of stops
+		double busSpace = Settings.STOPCOUNT/Settings.BUSCOUNT; //Separate the buses evenly per amount of stops
 		
 		for(int i = 0;i<Settings.BUSCOUNT;i++)
 		{
-			buses[i] = new Bus(i*busSpace);
+			buses[i] = new Bus((int)Math.floor(i*busSpace));
 			agenda.add(new BusStopEvent(buses[i]), 10);
 		}
 		
@@ -27,7 +27,7 @@ public class Simulator {
 		
 		System.out.println("Total Riders: "+Stats.totalRiders);
 		System.out.println("Biggest Q: "+Stats.longestQ);
-		System.out.println("Average Wait Time: "+Stats.totalWaitTime/Stats.totalRiders);
-		System.out.println("Average RIDE Time: "+Stats.totalRideTime/Stats.totalRiders);
+		System.out.println("Average Wait Time: "+Stats.totalWaitTime/Stats.totalBoardedRiders);
+		System.out.println("Average RIDE Time: "+Stats.totalRideTime/Stats.totalRidersRoad);
 	}
 }
