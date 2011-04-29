@@ -34,7 +34,8 @@ public class BusStopEvent implements Event {
 		while(bus.riders.length() < 60 && bus.current.riders.length() > 0)
 		{
 			Rider r = (Rider)bus.current.riders.remove();
-			Stats.totalWaitTime += Simulator.agenda.getCurrentTime() - r.boardTime;
+			r.boardTime = Simulator.agenda.getCurrentTime()+stopTime;
+			Stats.totalWaitTime += Simulator.agenda.getCurrentTime() - r.arrivalTime;
 			bus.riders.add(r);
 			stopTime += Settings.BOARDTIME;
 		}
