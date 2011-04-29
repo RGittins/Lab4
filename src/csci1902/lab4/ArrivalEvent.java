@@ -10,7 +10,7 @@ public class ArrivalEvent implements Event {
 	public void run() {
 		Simulator.agenda.add(new ArrivalEvent(stop), randomArrivalTime());
 		
-		stop.addRider(new Rider(Simulator.agenda.getCurrentTime(),(Settings.STOPCOUNT+randomStop())%Settings.STOPCOUNT));
+		stop.addRider(new Rider(Simulator.agenda.getCurrentTime(),(stop.getStopNumber()+randomStop())%Settings.STOPCOUNT));
 		
 		if(stop.riders.length() > Stats.longestQ)
 			Stats.longestQ = stop.riders.length();

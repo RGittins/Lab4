@@ -1,8 +1,7 @@
 package csci1902.lab4;
-
 public final class Settings {
-	public static final int RUNTIME = 2000;
-	public static final int BUSCOUNT = 3;
+	public static final int RUNTIME = 100000;
+	public static final int BUSCOUNT = 19;
 	public static final int STOPCOUNT = 20;
 	public static final int ARRIVALRATE = 10;
 	

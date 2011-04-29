@@ -8,7 +8,6 @@ public class BusStopEvent implements Event {
 	
 	@Override
 	public void run() {
-		
 		bus.current = bus.getNextStop();
 		bus.incNextStop(); //Plan next stop
 		
@@ -20,9 +19,9 @@ public class BusStopEvent implements Event {
 		{
 			Rider currentRider = (Rider)bus.riders.remove();
 			if(currentRider.exitStop == bus.current.getStopNumber())
-			{
+			{			
+				Stats.totalRideTime += Simulator.agenda.getCurrentTime()+stopTime - currentRider.boardTime;
 				stopTime += Settings.DEBOARDTIME;
-				Stats.totalRideTime += Simulator.agenda.getCurrentTime() - currentRider.boardTime; 
 			}	
 			else
 				tempQ.add(currentRider); //Add the rider back into the new bus queue
@@ -31,16 +30,16 @@ public class BusStopEvent implements Event {
 		bus.riders = tempQ; // replace the bus queue
 		
 		//Load the waiting riders from the stop
-		while(bus.riders.length() < 60 && bus.current.riders.length() > 0)
+		while(bus.riders.length() < Settings.MAXBUSLOAD && bus.current.riders.length() > 0)
 		{
 			Rider r = (Rider)bus.current.riders.remove();
 			r.boardTime = Simulator.agenda.getCurrentTime()+stopTime;
-			Stats.totalWaitTime += Simulator.agenda.getCurrentTime() - r.arrivalTime;
+			Stats.totalWaitTime += r.boardTime - r.arrivalTime;
+			//System.out.println(r.boardTime + " " + r.arrivalTime);
 			bus.riders.add(r);
 			stopTime += Settings.BOARDTIME;
 		}
-		
-		Simulator.agenda.add(new BusStopEvent(bus), Settings.TRAVELTIME); 
+		Simulator.agenda.add(new BusStopEvent(bus), Settings.TRAVELTIME+stopTime); 
 		
 		//There is no need to implement the ability to skip a stop. System naturally handles it
 	}
