@@ -17,6 +17,7 @@ public class BusStopEvent implements Event {
 		Q1 tempQ = new Q1();
 		while(bus.riders.length() > 0)
 		{
+			
 			Rider currentRider = (Rider)bus.riders.remove();
 			if(currentRider.exitStop == bus.current.getStopNumber())
 			{			
@@ -30,19 +31,23 @@ public class BusStopEvent implements Event {
 		
 		bus.riders = tempQ; // replace the bus queue
 		
+		Stats.totalQueue += bus.current.riders.length();
+		Stats.totalStops++;
+		
 		//Load the waiting riders from the stop
 		while(bus.riders.length() < Settings.MAXBUSLOAD && bus.current.riders.length() > 0)
 		{
 			Rider r = (Rider)bus.current.riders.remove();
 			r.boardTime = Simulator.agenda.getCurrentTime()+stopTime;
 			Stats.totalWaitTime += r.boardTime - r.arrivalTime;
-			//System.out.println(r.boardTime + " " + r.arrivalTime);
 			bus.riders.add(r);
 			Stats.totalBoardedRiders++;
 			stopTime += Settings.BOARDTIME;
 		}
-		Simulator.agenda.add(new BusStopEvent(bus), Settings.TRAVELTIME+stopTime); 
 		
+		Stats.totalBusQueue += bus.riders.length();
+		
+		Simulator.agenda.add(new BusStopEvent(bus), Settings.TRAVELTIME+stopTime); 
 		//There is no need to implement the ability to skip a stop. System naturally handles it
 	}
 

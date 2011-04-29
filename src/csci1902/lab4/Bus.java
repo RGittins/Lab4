@@ -12,7 +12,6 @@ public class Bus {
 	
 	public void incNextStop(){
 		next = (next+1)%Settings.STOPCOUNT;
-		System.out.println(next);
 	}
 	
 	public int getNextStopNumber(){

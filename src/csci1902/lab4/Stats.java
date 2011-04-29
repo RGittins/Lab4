@@ -9,8 +9,11 @@ public class Stats {
 	
 	public static double longestWaitTime = 0;
 	public static double longestRideTime = 0;
-	
 	public static int longestQ = 0;
 	
+	public static int totalQueue = 0;
+	public static int totalStops = 0;
+	
+	public static int totalBusQueue=0;
 
 }
