@@ -46,7 +46,7 @@ public class BusStopEvent implements Event {
 		}
 		
 		Stats.totalBusQueue += bus.riders.length();
-		
+		Stats.totalStopTime += stopTime;
 		Simulator.agenda.add(new BusStopEvent(bus), Settings.TRAVELTIME+stopTime); 
 		//There is no need to implement the ability to skip a stop. System naturally handles it
 	}

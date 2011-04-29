@@ -26,9 +26,11 @@ public class Simulator {
 			agenda.remove().run();
 		
 		System.out.println("Total Riders: "+Stats.totalRiders);
+		System.out.println("Total Bus Stops: "+Stats.totalStops);
 		System.out.println("Biggest Q: "+Stats.longestQ);
 		System.out.println("Average Q: "+(float)Stats.totalQueue/Stats.totalStops);
 		System.out.println("Average Bus Q: "+(float)Stats.totalBusQueue/Stats.totalStops);
+		System.out.println("Average Time at Stop : "+(float)Stats.totalStopTime/Stats.totalStops);
 		System.out.println("Average Wait Time: "+Stats.totalWaitTime/Stats.totalBoardedRiders);
 		System.out.println("Average RIDE Time: "+Stats.totalRideTime/Stats.totalRidersRoad);
 	}

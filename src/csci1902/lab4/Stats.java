@@ -15,5 +15,7 @@ public class Stats {
 	public static int totalStops = 0;
 	
 	public static int totalBusQueue=0;
+	
+	public static int totalStopTime = 0;
 
 }
